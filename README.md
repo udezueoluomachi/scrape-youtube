@@ -67,3 +67,9 @@ VISITOR_DATA: <VISITOR_DATA_HERE>
 
 videoId: string - The URL of the YouTube embed from which you want to scrape data.
 This function launches a headless browser, navigates to the specified YouTube embed URL, and logs the PO Token and visitor data to the console.
+
+
+
+## Edit from Fork
+
+Added a callback that enables you to get the tokens from your code

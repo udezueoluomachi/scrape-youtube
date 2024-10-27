@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 
 // Define the function that will scrape YouTube data
-export async function scrapeYouTubeData(videoId) {
+export async function scrapeYouTubeData(videoId, callback) {
   // Launch the browser
   const browser = await puppeteer.launch({ headless: true });
 
@@ -19,6 +19,12 @@ export async function scrapeYouTubeData(videoId) {
     client.on("Network.requestWillBeSent", (e) => {
       if (e.request.url.includes("/youtubei/v1/player")) {
         const jsonData = JSON.parse(e.request.postData);
+        callback(
+          {
+            PO_TOKEN : jsonData["serviceIntegrityDimensions"]["poToken"],
+            VISITOR_DATA : jsonData["context"]["client"]["visitorData"]
+          }
+        )
 
         // Extract and log PO Token and visitor data
         console.log(
